@@ -11,9 +11,13 @@ import { performanceStandards } from "./schema";
 import { db } from "./db";
 import { asc } from "drizzle-orm";
 
+const DEV_AUTH_MODE = process.env.DEV_AUTH_MODE === "true";
+
 export async function registerRoutes(app: Express): Promise<Server> {
   await setupAuth(app);
-  await storage.seedEvaluationItems();
+  if (!DEV_AUTH_MODE) {
+    await storage.seedEvaluationItems();
+  }
   
   // --- Notification Routes ---
   app.get("/api/notifications", isAuthenticated, async (req, res) => {
@@ -235,6 +239,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Check session-based auth first (custom login)
       const sessionUserId = (req.session as any)?.userId;
       if (sessionUserId) {
+        if (DEV_AUTH_MODE) {
+          return res.json({
+            id: sessionUserId,
+            role: "teacher",
+            onboardingCompleted: true,
+            fullNameArabic: "مستخدم تجريبي",
+          });
+        }
         const dbUser = await storage.getUser(sessionUserId);
         return res.json(dbUser);
       }

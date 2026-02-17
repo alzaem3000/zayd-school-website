@@ -9,6 +9,9 @@ import connectPg from "connect-pg-simple";
 import { storage } from "./storage";
 
 const DATABASE_URL = process.env.DATABASE_URL ?? "postgresql://postgres:password@helium/heliumdb?sslmode=disable";
+const DEV_AUTH_MODE = process.env.DEV_AUTH_MODE === "true";
+const SESSION_SECRET = process.env.SESSION_SECRET ?? (DEV_AUTH_MODE ? "dev-session-secret" : undefined);
+const DEV_USER_ID = process.env.DEV_AUTH_USER_ID ?? "dev-teacher-1";
 
 const getOidcConfig = memoize(
   async () => {
@@ -29,14 +32,19 @@ export function getSession() {
     ttl: sessionTtl,
     tableName: "sessions",
   });
+
+  if (!SESSION_SECRET) {
+    throw new Error("SESSION_SECRET must be set unless DEV_AUTH_MODE=true");
+  }
+
   return session({
-    secret: process.env.SESSION_SECRET!,
+    secret: SESSION_SECRET,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: true,
+      secure: !DEV_AUTH_MODE,
       maxAge: sessionTtl,
     },
   });
@@ -52,9 +60,7 @@ function updateUserSession(
   user.expires_at = user.claims?.exp;
 }
 
-async function upsertUser(
-  claims: any,
-) {
+async function upsertUser(claims: any) {
   await storage.upsertUser({
     id: claims["sub"],
     email: claims["email"],
@@ -64,9 +70,43 @@ async function upsertUser(
   });
 }
 
+async function setupDevAuth(app: Express) {
+  app.use((req, _res, next) => {
+    if (!(req.session as any).userId) {
+      (req.session as any).userId = DEV_USER_ID;
+    }
+    next();
+  });
+
+  app.get("/api/login", (_req, res) => res.redirect("/home"));
+  app.get("/api/callback", (_req, res) => res.redirect("/home"));
+  app.get("/api/logout", (req, res) => {
+    req.session.destroy(() => res.redirect("/"));
+  });
+  app.post("/api/dev-login", (req, res) => {
+    const userId = req.body?.userId || DEV_USER_ID;
+    (req.session as any).userId = userId;
+    return res.json({
+      ok: true,
+      user: {
+        id: userId,
+        role: "teacher",
+        onboardingCompleted: true,
+        fullNameArabic: "مستخدم تجريبي",
+      },
+    });
+  });
+}
+
 export async function setupAuth(app: Express) {
   app.set("trust proxy", 1);
   app.use(getSession());
+
+  if (DEV_AUTH_MODE) {
+    await setupDevAuth(app);
+    return;
+  }
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -133,13 +173,15 @@ export async function setupAuth(app: Express) {
 }
 
 export const isAuthenticated: RequestHandler = async (req, res, next) => {
-  // Check session-based auth first (custom login)
   const sessionUserId = (req.session as any)?.userId;
   if (sessionUserId) {
     return next();
   }
 
-  // Fall back to Replit OAuth
+  if (DEV_AUTH_MODE) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
   const user = req.user as any;
 
   if (!req.isAuthenticated() || !user.expires_at) {
@@ -162,29 +204,29 @@ export const isAuthenticated: RequestHandler = async (req, res, next) => {
     const tokenResponse = await client.refreshTokenGrant(config, refreshToken);
     updateUserSession(user, tokenResponse);
     return next();
-  } catch (error) {
+  } catch {
     res.status(401).json({ message: "Unauthorized" });
     return;
   }
 };
 
-// Helper function to get userId from session or OAuth
 async function getUserIdFromRequest(req: any): Promise<string | null> {
-  // Check session-based auth first (custom login)
   const sessionUserId = (req.session as any)?.userId;
   if (sessionUserId) {
     return sessionUserId;
   }
-  
-  // Fall back to Replit OAuth
+
+  if (DEV_AUTH_MODE) {
+    return null;
+  }
+
   const user = req.user as any;
   return user?.claims?.sub || null;
 }
 
-// Middleware to check if user is the site creator (highest permission level)
 export const isCreator: RequestHandler = async (req, res, next) => {
   const userId = await getUserIdFromRequest(req);
-  
+
   if (!userId) {
     return res.status(401).json({ message: "Unauthorized" });
   }
@@ -195,15 +237,14 @@ export const isCreator: RequestHandler = async (req, res, next) => {
       return res.status(403).json({ message: "Forbidden - Creator access required" });
     }
     return next();
-  } catch (error) {
+  } catch {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Middleware to check if user is a principal (admin role) or creator
 export const isPrincipal: RequestHandler = async (req, res, next) => {
   const userId = await getUserIdFromRequest(req);
-  
+
   if (!userId) {
     return res.status(401).json({ message: "Unauthorized" });
   }
@@ -214,15 +255,14 @@ export const isPrincipal: RequestHandler = async (req, res, next) => {
       return res.status(403).json({ message: "Forbidden - Principal access required" });
     }
     return next();
-  } catch (error) {
+  } catch {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Middleware to check if user is a supervisor (or higher)
 export const isSupervisor: RequestHandler = async (req, res, next) => {
   const userId = await getUserIdFromRequest(req);
-  
+
   if (!userId) {
     return res.status(401).json({ message: "Unauthorized" });
   }
@@ -233,10 +273,9 @@ export const isSupervisor: RequestHandler = async (req, res, next) => {
       return res.status(403).json({ message: "Forbidden - Supervisor access required" });
     }
     return next();
-  } catch (error) {
+  } catch {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-// Export helper function for use in routes
 export { getUserIdFromRequest };

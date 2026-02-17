@@ -10,7 +10,8 @@
     "check": "node scripts/check-quality.mjs",
     "db:push": "drizzle-kit push",
     "test": "vitest run",
-    "quality": "npm run check && npm test"
+    "quality": "npm run check && npm test && npm run build && npm run test:e2e",
+    "test:e2e": "node scripts/e2e-smoke.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
