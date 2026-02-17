@@ -1,8 +1,8 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
-import type { User } from "@shared/schema";
+import { Card } from "./card";
+import { Button } from "./button";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Separator } from "./separator";
+import type { User } from "./schema";
 import { 
   FileText, 
   Download, 

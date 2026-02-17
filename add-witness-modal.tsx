@@ -7,10 +7,10 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+} from "./dialog";
+import { Button } from "./button";
+import { Input } from "./input";
+import { Textarea } from "./textarea";
 import {
   Form,
   FormControl,
@@ -18,16 +18,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "./form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "./select";
 import { Save, Upload, X } from "lucide-react";
-import type { Criteria } from "@shared/schema";
+import type { Criteria } from "./schema";
 
 const witnessFormSchema = z.object({
   title: z.string().min(3, "عنوان الشاهد يجب أن يكون 3 أحرف على الأقل"),

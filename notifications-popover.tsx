@@ -4,13 +4,13 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+} from "./popover";
+import { Button } from "./button";
+import { ScrollArea } from "./scroll-area";
+import { apiRequest, queryClient } from "./queryClient";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "./badge";
 import { Link } from "wouter";
 
 interface Notification {

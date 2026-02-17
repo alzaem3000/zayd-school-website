@@ -3,11 +3,11 @@ import type { Express } from "express";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated, isPrincipal, isCreator, getUserIdFromRequest } from "./replitAuth";
 import { randomBytes } from "crypto";
-import { NotificationService } from "./services/notification";
-import { AuditService } from "./services/audit";
-import { CycleService } from "./services/cycles";
-import { emailService } from "./services/email";
-import { performanceStandards } from "@shared/schema";
+import { NotificationService } from "./notification";
+import { AuditService } from "./audit";
+import { CycleService } from "./cycles";
+import { emailService } from "./email";
+import { performanceStandards } from "./schema";
 import { db } from "./db";
 import { asc } from "drizzle-orm";
 

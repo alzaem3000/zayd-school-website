@@ -1,8 +1,8 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./dialog";
+import { Button } from "./button";
+import { Badge } from "./badge";
 import { FileText, Eye, CheckCircle2, XCircle, Info, Download, Image as ImageIcon, File } from "lucide-react";
-import { PERFORMANCE_STANDARDS, mapDbStandardToUI, type PerformanceStandardUI } from "@/lib/constants";
+import { PERFORMANCE_STANDARDS, mapDbStandardToUI, type PerformanceStandardUI } from "./constants";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 

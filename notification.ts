@@ -1,5 +1,5 @@
-import { db } from "../db";
-import { notifications } from "@shared/schema";
+import { db } from "./db";
+import { notifications } from "./schema";
 import { eq, desc } from "drizzle-orm";
 
 export class NotificationService {

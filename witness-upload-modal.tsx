@@ -1,21 +1,21 @@
 import { useState, useRef, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./dialog";
+import { Button } from "./button";
+import { Input } from "./input";
+import { Label } from "./label";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
+import { ScrollArea } from "./scroll-area";
+import { Badge } from "./badge";
 import {
   FileText, CloudUpload, Link as LinkIcon, Lightbulb,
   ChevronLeft, X, Check, Upload, Image, File, Video, Trash2
 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "./use-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "./queryClient";
 import imageCompression from "browser-image-compression";
-import type { EvaluationItem } from "@shared/schema";
-import { getIconComponent } from "@/lib/constants";
+import type { EvaluationItem } from "./schema";
+import { getIconComponent } from "./constants";
 
 interface WitnessUploadModalProps {
   isOpen: boolean;

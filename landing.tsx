@@ -1,9 +1,9 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "./button";
+import { Card, CardContent } from "./card";
 import { motion } from "framer-motion";
 import { CheckCircle, FileText, BarChart3, ShieldCheck, ArrowLeft, BookOpen, Users, Award, Lock, Zap, Globe } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Landing() {
   const fadeIn = {

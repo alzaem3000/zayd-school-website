@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 
-vi.mock("../server/db", () => ({
+vi.mock("./db", () => ({
   db: {
     query: {
       academicCycles: {
@@ -26,10 +26,10 @@ vi.mock("../server/db", () => ({
 
 describe("CycleService Logic", () => {
   it("should create a default cycle when none exists", async () => {
-    const { db } = await import("../server/db");
+    const { db } = await import("./db");
     (db.query.academicCycles.findFirst as any).mockResolvedValueOnce(undefined);
 
-    const { CycleService } = await import("../server/services/cycles");
+    const { CycleService } = await import("./cycles");
     const cycle = await CycleService.getActiveCycle();
 
     expect(cycle).toBeDefined();
@@ -39,7 +39,7 @@ describe("CycleService Logic", () => {
   });
 
   it("should return existing active cycle if one exists", async () => {
-    const { db } = await import("../server/db");
+    const { db } = await import("./db");
     const existingCycle = {
       id: 5,
       name: "1446-1447",
@@ -50,7 +50,7 @@ describe("CycleService Logic", () => {
     };
     (db.query.academicCycles.findFirst as any).mockResolvedValueOnce(existingCycle);
 
-    const { CycleService } = await import("../server/services/cycles");
+    const { CycleService } = await import("./cycles");
     const cycle = await CycleService.getActiveCycle();
 
     expect(cycle).toEqual(existingCycle);

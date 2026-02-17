@@ -4,11 +4,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "./dialog";
+import { Button } from "./button";
+import { Checkbox } from "./checkbox";
 import { Save } from "lucide-react";
-import type { StrategyWithSelection } from "@shared/schema";
+import type { StrategyWithSelection } from "./schema";
 
 interface StrategiesModalProps {
   open: boolean;

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
+import { Button } from "./button";
+import { Badge } from "./badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "./dialog";
+import { Textarea } from "./textarea";
+import { Input } from "./input";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { useToast } from "./use-toast";
+import { apiRequest, queryClient } from "./queryClient";
 import { 
   Users, 
   FileCheck, 
@@ -53,7 +53,7 @@ import {
   FolderOpen,
   Sparkles,
 } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 import type { 
   User as UserType, 
   PrincipalDashboardStats, 
@@ -63,14 +63,14 @@ import type {
   Witness,
   TeacherWitnessWithFiles,
   EvaluationItem 
-} from "@shared/schema";
-import { Skeleton } from "@/components/ui/skeleton";
-import { PrincipalAnalytics } from "@/components/principal-analytics";
-import { getIconComponent } from "@/lib/constants";
+} from "./schema";
+import { Skeleton } from "./skeleton";
+import { PrincipalAnalytics } from "./principal-analytics";
+import { getIconComponent } from "./constants";
 import { Link } from "wouter";
 import { Calendar } from "lucide-react";
-import { EvidenceReviewModal } from "@/components/evidence-review-modal";
-import { Progress } from "@/components/ui/progress";
+import { EvidenceReviewModal } from "./evidence-review-modal";
+import { Progress } from "./progress";
 
 const indicatorIcons: Record<string, React.ReactNode> = {
   "أداء الواجبات الوظيفية": <ClipboardList className="h-6 w-6" />,

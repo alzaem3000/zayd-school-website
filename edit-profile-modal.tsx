@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./dialog";
+import { Button } from "./button";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./form";
+import { Input } from "./input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { User as UserIcon } from "lucide-react";
-import type { User } from "@shared/schema";
+import type { User } from "./schema";
 
 const educationalLevels = [
   { value: "معلم", label: "معلم" },

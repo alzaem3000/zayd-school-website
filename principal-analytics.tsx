@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import { Users, Target, Clock, CheckCircle2, XCircle } from "lucide-react";
-import type { PrincipalDashboardStats, TeacherWithStats } from "@shared/schema";
+import type { PrincipalDashboardStats, TeacherWithStats } from "./schema";
 
 interface PrincipalAnalyticsProps {
   stats: PrincipalDashboardStats;

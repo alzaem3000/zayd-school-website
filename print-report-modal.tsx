@@ -1,7 +1,7 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./dialog";
+import { Button } from "./button";
 import { Printer } from "lucide-react";
-import type { IndicatorWithCriteria, DashboardStats, User } from "@shared/schema";
+import type { IndicatorWithCriteria, DashboardStats, User } from "./schema";
 import { PrintableCharter } from "./printable-charter";
 
 interface PrintReportModalProps {

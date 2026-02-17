@@ -1,20 +1,20 @@
 import { Switch, Route, useLocation } from "wouter";
-import { queryClient } from "./lib/queryClient";
+import { queryClient } from "./queryClient";
 import { QueryClientProvider, useQuery } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "@/components/theme-provider";
-import { useAuth } from "@/hooks/useAuth";
-import Landing from "@/pages/landing";
-import Login from "@/pages/login";
-import Home from "@/pages/home";
-import Principal from "@/pages/principal";
-import CyclesSettings from "@/pages/cycles-settings";
-import Onboarding from "@/pages/onboarding";
-import NotFound from "@/pages/not-found";
-import type { User } from "@shared/schema";
+import { Toaster } from "./toaster";
+import { TooltipProvider } from "./tooltip";
+import { ThemeProvider } from "./theme-provider";
+import { useAuth } from "./useAuth";
+import Landing from "./landing";
+import Login from "./login";
+import Home from "./home";
+import Principal from "./principal";
+import CyclesSettings from "./cycles-settings";
+import Onboarding from "./onboarding";
+import NotFound from "./not-found";
+import type { User } from "./schema";
 import { useEffect } from "react";
-import { OfflineBanner } from "@/components/offline-banner";
+import { OfflineBanner } from "./offline-banner";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();

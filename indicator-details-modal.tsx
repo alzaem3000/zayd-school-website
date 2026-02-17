@@ -3,12 +3,12 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import type { IndicatorWithCriteria, Witness } from "@shared/schema";
+} from "./dialog";
+import { Button } from "./button";
+import { Badge } from "./badge";
+import { Card } from "./card";
+import { Separator } from "./separator";
+import type { IndicatorWithCriteria, Witness } from "./schema";
 import { 
   CheckCircle2, 
   FileText, 

@@ -1,5 +1,5 @@
-import { db } from "../server/db";
-import { performanceStandards } from "../shared/schema";
+import { db } from "./db";
+import { performanceStandards } from "./schema";
 import { sql } from "drizzle-orm";
 
 const STANDARDS_DATA = [
