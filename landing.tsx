@@ -1,271 +1,207 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { CheckCircle, FileText, BarChart3, ShieldCheck, ArrowLeft, BookOpen, Users, Award, Lock, Zap, Globe } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
+import {
+  BookOpen,
+  ShieldCheck,
+  BarChart3,
+  CheckCircle2,
+  GraduationCap,
+  ClipboardCheck,
+  BellRing,
+  ArrowLeft,
+  Building2,
+  Target,
+  Users,
+  FileCheck2,
+  Sparkles,
+  Lock,
+} from "lucide-react";
+
+import { Button } from "./button";
+import { Card, CardContent } from "./card";
+import { ThemeToggle } from "./theme-toggle";
 
 export default function Landing() {
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
-
   return (
-    <div className="min-h-screen bg-background font-sans" dir="rtl" data-testid="page-landing">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-slate-950 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+    <div className="min-h-screen bg-background text-foreground" dir="rtl" data-testid="page-landing">
+      <BackgroundDecor />
 
-      <nav className="container mx-auto px-6 py-6 flex justify-between items-center relative z-10 flex-wrap gap-2">
-        <div className="flex items-center gap-2">
-          <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
-            <ShieldCheck className="h-6 w-6" />
+      <header className="sticky top-0 z-40 backdrop-blur bg-background/90 border-b border-border">
+        <div className="container mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-11 w-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20">
+              <ShieldCheck className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground">منصة مؤسسية</p>
+              <h1 className="font-bold text-lg md:text-xl">تقييم أداء المعلمين</h1>
+            </div>
           </div>
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white hidden md:block">ميثاق الأداء الوظيفي</h1>
-        </div>
-        <div className="flex items-center gap-4">
-          <ThemeToggle />
-          <Link href="/login" data-testid="link-login">
-            <Button variant="outline" className="font-bold border-primary text-primary" data-testid="button-login">
-              تسجيل الدخول
-            </Button>
-          </Link>
-        </div>
-      </nav>
 
-      <main className="container mx-auto px-6 pt-16 pb-12 text-center relative z-10">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.5 }}
-          variants={fadeIn}
-          className="max-w-3xl mx-auto space-y-6"
-        >
-          <div className="inline-block px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-4 border border-blue-100 dark:border-blue-800" data-testid="badge-moe">
-            متوافق مع معايير وزارة التعليم الجديدة
-          </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight" data-testid="text-hero-title">
-            نظام <span className="text-transparent bg-clip-text bg-gradient-to-l from-blue-600 to-green-600">توثيق الأداء</span> الذكي
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto" data-testid="text-hero-subtitle">
-            منصة متكاملة تمكن المعلمين من توثيق منجزاتهم المهنية، وتتيح للمديرين متابعة الأداء واعتماد الشواهد بدقة وسهولة.
-          </p>
-
-          <div className="flex justify-center gap-4 pt-4 flex-wrap">
-            <Link href="/login" data-testid="link-get-started">
-              <Button size="lg" className="shadow-lg bg-gradient-to-l from-blue-600 to-green-600 border-0" data-testid="button-get-started">
-                ابدأ الآن <ArrowLeft className="mr-2 h-5 w-5" />
+          <div className="flex items-center gap-2 md:gap-3">
+            <ThemeToggle />
+            <Link href="/login">
+              <Button variant="outline" className="font-semibold" data-testid="button-login-header">
+                تسجيل الدخول
               </Button>
             </Link>
           </div>
-        </motion.div>
+        </div>
+      </header>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          variants={fadeIn}
-          className="grid md:grid-cols-3 gap-8 mt-24"
-        >
-          <FeatureCard
-            icon={<FileText className="h-8 w-8 text-blue-500" />}
-            title="توثيق الشواهد"
-            description="رفع وتنظيم الشواهد المنهجية وغير المنهجية وربطها بالمعايير الوزارية بضغطة زر."
-            testId="feature-docs"
+      <main>
+        <section className="container mx-auto px-4 md:px-6 pt-12 md:pt-20 pb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-5xl mx-auto text-center"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm text-primary mb-6">
+              <Sparkles className="h-4 w-4" />
+              متوافق مع نموذج تقييم الأداء الوظيفي
+            </div>
+
+            <h2 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-5">
+              منصة رسمية لإدارة
+              <span className="block text-primary">تقييم أداء المعلمين</span>
+            </h2>
+
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8" data-testid="text-hero-subtitle">
+              نظام رقمي متكامل لتوثيق الشواهد، متابعة المؤشرات، اعتماد النتائج، وإصدار تقارير موثوقة تدعم
+              التحسين المستمر ورفع جودة التعليم.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+              <Link href="/login" data-testid="link-get-started">
+                <Button size="lg" className="font-bold px-8" data-testid="button-get-started">
+                  ابدأ الآن
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <a href="#features">
+                <Button size="lg" variant="outline" className="font-semibold px-8">
+                  استعراض المزايا
+                </Button>
+              </a>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+              <StatCard icon={<Users className="h-5 w-5" />} title="إدارة المستخدمين" subtitle="صلاحيات متعددة" />
+              <StatCard icon={<Target className="h-5 w-5" />} title="مؤشرات دقيقة" subtitle="متابعة مستمرة" />
+              <StatCard icon={<FileCheck2 className="h-5 w-5" />} title="شواهد موثقة" subtitle="رفع واعتماد" />
+              <StatCard icon={<BarChart3 className="h-5 w-5" />} title="تقارير تحليلية" subtitle="دعم القرار" />
+            </div>
+          </motion.div>
+        </section>
+
+        <section id="features" className="container mx-auto px-4 md:px-6 py-14 md:py-16">
+          <SectionHeading
+            title="مزايا المنصة"
+            description="تم تصميم المنصة لتلائم بيئة المدرسة وتدعم رحلة التقييم من التخطيط وحتى الاعتماد النهائي."
           />
-          <FeatureCard
-            icon={<CheckCircle className="h-8 w-8 text-green-500" />}
-            title="الاعتماد الفوري"
-            description="نظام إشعارات لحظي يتيح للمدير مراجعة واعتماد الملفات مع التغذية الراجعة."
-            testId="feature-approval"
-          />
-          <FeatureCard
-            icon={<BarChart3 className="h-8 w-8 text-purple-500" />}
-            title="تقارير الأداء"
-            description="لوحات معلومات تحليلية تظهر نسب الإنجاز وتدعم اتخاذ القرار التربوي."
-            testId="feature-reports"
-          />
-        </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-5 mt-8">
+            <FeatureCard icon={<ClipboardCheck className="h-7 w-7 text-primary" />} title="إدارة مؤشرات الأداء" description="إضافة وتنظيم مؤشرات التقييم وربطها بالمعايير المهنية بطريقة واضحة وقابلة للقياس." />
+            <FeatureCard icon={<BookOpen className="h-7 w-7 text-primary" />} title="توثيق الشواهد" description="رفع ملفات الشواهد وربطها بالمؤشر المناسب مع دعم التصنيف وإمكانية المراجعة." />
+            <FeatureCard icon={<CheckCircle2 className="h-7 w-7 text-primary" />} title="سير اعتماد رسمي" description="مسار تدقيق واعتماد منظم بين المعلم والإدارة مع حفظ الأثر والملاحظات." />
+            <FeatureCard icon={<BellRing className="h-7 w-7 text-primary" />} title="إشعارات فورية" description="تنبيهات آنية للتغييرات والطلبات الجديدة لضمان سرعة الاستجابة والمتابعة." />
+            <FeatureCard icon={<BarChart3 className="h-7 w-7 text-primary" />} title="تحليلات وتقارير" description="تقارير أداء مرئية تدعم القيادة المدرسية في المتابعة واتخاذ القرار." />
+            <FeatureCard icon={<Lock className="h-7 w-7 text-primary" />} title="أمان وصلاحيات" description="إدارة أدوار وصلاحيات (معلم، مدير، منشئ) لضمان وصول مناسب وحماية البيانات." />
+          </div>
+        </section>
+
+        <section className="border-y border-border bg-muted/30 py-14 md:py-16">
+          <div className="container mx-auto px-4 md:px-6">
+            <SectionHeading
+              title="آلية العمل"
+              description="رحلة مبسطة وواضحة تبدأ من إدخال البيانات وتنتهي بتقرير أداء احترافي."
+            />
+
+            <div className="grid md:grid-cols-3 gap-6 mt-10">
+              <StepCard number="1" icon={<GraduationCap className="h-6 w-6" />} title="تهيئة الحساب" description="يدخل المعلم ويُكمل البيانات الأساسية المرتبطة بملف الأداء." />
+              <StepCard number="2" icon={<Building2 className="h-6 w-6" />} title="إدخال المؤشرات والشواهد" description="يوثق المعلم إنجازاته ويربط كل شاهد بالمؤشر المناسب." />
+              <StepCard number="3" icon={<ShieldCheck className="h-6 w-6" />} title="المراجعة والاعتماد" description="تراجع الإدارة المدخلات وتعتمدها ثم تُصدر تقارير المتابعة." />
+            </div>
+          </div>
+        </section>
+
+        <section className="container mx-auto px-4 md:px-6 py-16">
+          <Card className="max-w-4xl mx-auto border-primary/20 bg-gradient-to-l from-primary/5 to-transparent">
+            <CardContent className="p-8 md:p-10 text-center">
+              <h3 className="text-2xl md:text-3xl font-extrabold mb-3">جاهزون للانطلاق؟</h3>
+              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                فعّل المنصة وابدأ إدارة تقييم الأداء بأسلوب احترافي موحد يعكس جودة العمل المؤسسي.
+              </p>
+              <Link href="/login">
+                <Button size="lg" className="font-bold px-10" data-testid="button-final-cta">
+                  الدخول إلى المنصة
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </section>
       </main>
-
-      <section className="relative z-10 py-16 bg-gray-50/80 dark:bg-slate-900/50 border-t border-b border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            variants={fadeIn}
-          >
-            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-2" data-testid="text-how-title">
-              كيف يعمل النظام؟
-            </h2>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-12 max-w-xl mx-auto">
-              ثلاث خطوات بسيطة لتوثيق أدائك الوظيفي واعتماده
-            </p>
-          </motion.div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <StepCard
-              number="1"
-              icon={<BookOpen className="h-6 w-6" />}
-              title="أضف المؤشرات"
-              description="حدد أهداف الأداء والجدارات المهنية مع الأوزان والمعايير المطلوبة."
-              testId="step-1"
-            />
-            <StepCard
-              number="2"
-              icon={<FileText className="h-6 w-6" />}
-              title="ارفع الشواهد"
-              description="أرفق الشواهد والأدلة مع اقتراحات ذكية من المعايير الوزارية."
-              testId="step-2"
-            />
-            <StepCard
-              number="3"
-              icon={<Award className="h-6 w-6" />}
-              title="احصل على الاعتماد"
-              description="قدّم الميثاق للمدير للمراجعة والاعتماد واطبع النسخة الرسمية."
-              testId="step-3"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 py-16">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            variants={fadeIn}
-          >
-            <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-2" data-testid="text-why-title">
-              لماذا هذا النظام؟
-            </h2>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-12 max-w-xl mx-auto">
-              مميزات مصممة خصيصاً لبيئة التعليم السعودية
-            </p>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <MiniFeature
-              icon={<ShieldCheck className="h-5 w-5 text-green-600" />}
-              title="متوافق مع الوزارة"
-              description="معايير ومؤشرات مطابقة لمتطلبات وزارة التعليم."
-              testId="mini-moe"
-            />
-            <MiniFeature
-              icon={<Zap className="h-5 w-5 text-amber-500" />}
-              title="ضغط تلقائي للصور"
-              description="ضغط الصور تلقائياً لتسريع الرفع وتوفير المساحة."
-              testId="mini-compress"
-            />
-            <MiniFeature
-              icon={<Users className="h-5 w-5 text-blue-500" />}
-              title="أدوار متعددة"
-              description="نظام صلاحيات للمعلمين والمديرين والمشرفين."
-              testId="mini-roles"
-            />
-            <MiniFeature
-              icon={<Lock className="h-5 w-5 text-red-500" />}
-              title="حماية البيانات"
-              description="عزل كامل لبيانات كل معلم مع تشفير آمن."
-              testId="mini-security"
-            />
-            <MiniFeature
-              icon={<Globe className="h-5 w-5 text-teal-500" />}
-              title="واجهة عربية كاملة"
-              description="تصميم RTL احترافي بخطوط عربية واضحة."
-              testId="mini-rtl"
-            />
-            <MiniFeature
-              icon={<BarChart3 className="h-5 w-5 text-purple-500" />}
-              title="إحصائيات لحظية"
-              description="تتبع نسب الإنجاز والتقدم بلوحات معلومات ذكية."
-              testId="mini-stats"
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-10 py-16 bg-gray-50/80 dark:bg-slate-900/50 border-t border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-6 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            variants={fadeIn}
-            className="max-w-2xl mx-auto"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4" data-testid="text-cta-title">
-              ابدأ توثيق أدائك الآن
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 mb-8">
-              انضم للنظام وابدأ بإضافة مؤشراتك ورفع شواهدك للحصول على الاعتماد بسهولة.
-            </p>
-            <Link href="/login" data-testid="link-cta-start">
-              <Button size="lg" className="shadow-lg bg-gradient-to-l from-blue-600 to-green-600 border-0" data-testid="button-cta-start">
-                سجّل الآن مجاناً <ArrowLeft className="mr-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      <footer className="border-t py-8 text-center text-gray-500 dark:text-gray-400 text-sm bg-white/50 dark:bg-slate-950/50 relative z-10">
-        <p data-testid="text-footer">جميع الحقوق محفوظة &copy; {new Date().getFullYear()} - نظام إدارة الأداء الوظيفي</p>
-        <p className="text-xs mt-2 opacity-70">الصفحة من إعداد عبدالعزيز الخلفان</p>
-      </footer>
     </div>
   );
 }
 
-function FeatureCard({ icon, title, description, testId }: { icon: React.ReactNode; title: string; description: string; testId: string }) {
+function BackgroundDecor() {
   return (
-    <Card className="border-none shadow-md bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm" data-testid={testId}>
-      <CardContent className="pt-6 text-center space-y-4">
-        <div className="h-16 w-16 bg-gray-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
-          {icon}
-        </div>
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-gray-500 dark:text-gray-400 leading-relaxed">{description}</p>
+    <div
+      className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_25%_20%,hsl(var(--primary)/0.10),transparent_35%),radial-gradient(circle_at_80%_20%,hsl(var(--accent)/0.10),transparent_30%),radial-gradient(circle_at_50%_80%,hsl(var(--primary)/0.06),transparent_35%)]"
+      aria-hidden
+    />
+  );
+}
+
+function SectionHeading({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="text-center max-w-2xl mx-auto">
+      <h3 className="text-3xl font-bold mb-3">{title}</h3>
+      <p className="text-muted-foreground text-lg leading-relaxed">{description}</p>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+  return (
+    <Card className="h-full">
+      <CardContent className="p-6 space-y-3">
+        <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">{icon}</div>
+        <h4 className="text-lg font-bold">{title}</h4>
+        <p className="text-muted-foreground leading-relaxed">{description}</p>
       </CardContent>
     </Card>
   );
 }
 
-function StepCard({ number, icon, title, description, testId }: { number: string; icon: React.ReactNode; title: string; description: string; testId: string }) {
+function StepCard({ number, icon, title, description }: { number: string; icon: React.ReactNode; title: string; description: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: Number(number) * 0.15 }}
-      className="text-center"
-      data-testid={testId}
-    >
-      <div className="relative mx-auto mb-4 w-14 h-14 rounded-full bg-gradient-to-bl from-blue-600 to-green-600 flex items-center justify-center text-white shadow-md">
-        {icon}
-        <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white dark:bg-slate-800 text-xs font-bold flex items-center justify-center text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 shadow-sm">
-          {number}
-        </span>
-      </div>
-      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{title}</h3>
-      <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs mx-auto">{description}</p>
-    </motion.div>
+    <Card className="text-center h-full">
+      <CardContent className="p-6">
+        <div className="mx-auto w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center relative mb-4">
+          {icon}
+          <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-background border border-border text-xs font-bold flex items-center justify-center">
+            {number}
+          </span>
+        </div>
+        <h4 className="font-bold text-lg mb-2">{title}</h4>
+        <p className="text-muted-foreground">{description}</p>
+      </CardContent>
+    </Card>
   );
 }
 
-function MiniFeature({ icon, title, description, testId }: { icon: React.ReactNode; title: string; description: string; testId: string }) {
+function StatCard({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle: string }) {
   return (
-    <div className="flex items-start gap-3 p-4 rounded-lg" data-testid={testId}>
-      <div className="h-10 w-10 rounded-lg bg-gray-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
-        {icon}
-      </div>
-      <div>
-        <h4 className="font-bold text-gray-900 dark:text-white text-sm mb-1">{title}</h4>
-        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{description}</p>
-      </div>
-    </div>
+    <Card>
+      <CardContent className="p-4 text-center space-y-1">
+        <div className="w-9 h-9 mx-auto rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">{icon}</div>
+        <p className="font-bold text-sm md:text-base">{title}</p>
+        <p className="text-xs text-muted-foreground">{subtitle}</p>
+      </CardContent>
+    </Card>
   );
 }

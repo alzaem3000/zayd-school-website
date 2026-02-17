@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
+import { Button } from "./button";
+import { Badge } from "./badge";
+import { useToast } from "./use-toast";
+import { apiRequest, queryClient } from "./queryClient";
 import { Calendar, CheckCircle2, Plus, Clock, ArrowRight } from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";

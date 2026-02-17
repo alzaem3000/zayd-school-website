@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { type User, type IndicatorWithCriteria } from "@shared/schema";
+import { type User, type IndicatorWithCriteria } from "./schema";
 
 interface PrintableCharterProps {
   user: User;

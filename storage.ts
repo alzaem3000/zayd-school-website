@@ -36,10 +36,10 @@ import {
   type WitnessFile,
   type InsertWitnessFile,
   type TeacherWitnessWithFiles,
-} from "@shared/schema";
+} from "./schema";
 import { db } from "./db";
 import { eq, and, sql, desc } from "drizzle-orm";
-import { CycleService } from "./services/cycles";
+import { CycleService } from "./cycles";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;

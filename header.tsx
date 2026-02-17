@@ -1,5 +1,5 @@
-import { Card } from "@/components/ui/card";
-import type { DashboardStats, User } from "@shared/schema";
+import { Card } from "./card";
+import type { DashboardStats, User } from "./schema";
 import { 
   BookOpen, 
   RefreshCw, 

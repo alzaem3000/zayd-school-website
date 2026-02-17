@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Button } from "./button";
+import { Card, CardContent, CardHeader, CardTitle } from "./card";
+import { Input } from "./input";
+import { Label } from "./label";
+import { ThemeToggle } from "./theme-toggle";
+import { useToast } from "./use-toast";
+import { apiRequest, queryClient } from "./queryClient";
 import { 
   BookOpen, 
   User, 

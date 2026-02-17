@@ -1,5 +1,5 @@
-import { db } from "../db";
-import { auditLogs } from "@shared/schema";
+import { db } from "./db";
+import { auditLogs } from "./schema";
 
 export class AuditService {
   static async log(data: { userId: string; action: string; entityType: string; entityId?: string; details?: any; ipAddress?: string; }) {

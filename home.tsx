@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useAuth } from "@/hooks/useAuth";
-import { useToast } from "@/hooks/use-toast";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { AddIndicatorModal } from "@/components/add-indicator-modal";
-import { StrategiesModal } from "@/components/strategies-modal";
-import { PrintReportModal } from "@/components/print-report-modal";
+import { useAuth } from "./useAuth";
+import { useToast } from "./use-toast";
+import { queryClient, apiRequest } from "./queryClient";
+import { Card } from "./card";
+import { Button } from "./button";
+import { Input } from "./input";
+import { Badge } from "./badge";
+import { Skeleton } from "./skeleton";
+import { Checkbox } from "./checkbox";
+import { Progress } from "./progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
+import { ThemeToggle } from "./theme-toggle";
+import { AddIndicatorModal } from "./add-indicator-modal";
+import { StrategiesModal } from "./strategies-modal";
+import { PrintReportModal } from "./print-report-modal";
 import type { 
   DashboardStats, 
   IndicatorWithCriteria, 
@@ -25,7 +25,7 @@ import type {
   Witness,
   TeacherWitnessWithFiles,
   EvaluationItem,
-} from "@shared/schema";
+} from "./schema";
 import { 
   Plus, 
   Printer, 
@@ -71,7 +71,7 @@ import {
   Sparkles,
   FolderOpen,
 } from "lucide-react";
-import type { SignatureWithDetails } from "@shared/schema";
+import type { SignatureWithDetails } from "./schema";
 
 const educationalLevels = [
   { value: "معلم", label: "معلم" },
@@ -105,8 +105,8 @@ const domainLabels: Record<string, string> = {
   practice: "الممارسة المهنية",
 };
 
-import { WitnessUploadModal } from "@/components/witness-upload-modal";
-import { getIconComponent } from "@/lib/constants";
+import { WitnessUploadModal } from "./witness-upload-modal";
+import { getIconComponent } from "./constants";
 
 export default function Home() {
   const { user } = useAuth();

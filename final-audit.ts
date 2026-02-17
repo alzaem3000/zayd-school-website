@@ -1,6 +1,6 @@
 import fs from "fs";
-import { db } from "../server/db";
-import { performanceStandards } from "../shared/schema";
+import { db } from "./db";
+import { performanceStandards } from "./schema";
 
 async function runAudit() {
   console.log("Starting Final System Audit...");

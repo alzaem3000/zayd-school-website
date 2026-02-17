@@ -1,7 +1,7 @@
-import { storage } from "../server/storage";
-import { CycleService } from "../server/services/cycles";
-import { db } from "../server/db";
-import { indicators, signatures, auditLogs, notifications, users } from "@shared/schema";
+import { storage } from "./storage";
+import { CycleService } from "./cycles";
+import { db } from "./db";
+import { indicators, signatures, auditLogs, notifications, users } from "./schema";
 import { eq, and } from "drizzle-orm";
 
 async function verify() {

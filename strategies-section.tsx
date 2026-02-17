@@ -1,7 +1,7 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import type { Strategy } from "@shared/schema";
+import { Card } from "./card";
+import { Button } from "./button";
+import { Badge } from "./badge";
+import type { Strategy } from "./schema";
 import { Target, X } from "lucide-react";
 
 interface StrategiesSectionProps {

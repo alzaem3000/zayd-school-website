@@ -1,5 +1,5 @@
-import { db } from "../db";
-import { academicCycles } from "@shared/schema";
+import { db } from "./db";
+import { academicCycles } from "./schema";
 import { eq } from "drizzle-orm";
 
 export class CycleService {
